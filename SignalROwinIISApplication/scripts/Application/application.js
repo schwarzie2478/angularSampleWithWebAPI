@@ -1,11 +1,18 @@
-﻿var applicationModule = angular.module('application', []);
+﻿
+(function (window, document) {
+    'use strict';
+    window.appName = 'application';
 
-// SignalR's hub object.
-var productMessageHub = $.connection.productMessageHub;
+    var applicationModule = angular.module(appName, ['Framework.Services']);
 
-$(function () {
-    $.connection.hub.logging = true;
-    $.connection.hub.start();
-});
+    // SignalR's hub object.
+    var productMessageHub = $.connection.productMessageHub;
 
-angular.module('application').value('productMessageHub', productMessageHub);
+    $(function () {
+        $.connection.hub.logging = true;
+        $.connection.hub.start();
+    });
+
+    angular.module(appName).value('productMessageHub', productMessageHub);
+
+})(window, document);
