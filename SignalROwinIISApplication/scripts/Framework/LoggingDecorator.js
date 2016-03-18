@@ -6,6 +6,13 @@
           // Use the `decorator` solution to substitute or attach behaviors to
           // original service instance; @see angular-mocks for more examples....
           var self = this;
+          var log = log4javascript.getDefaultLogger();
+          var ajaxAppender = new log4javascript.AjaxAppender('api/logging');
+          ajaxAppender.addHeader("Content-Type", "application/json");
+
+          ajaxAppender.setWaitForResponse(true);
+          //ajaxAppender.setLayout(new log4javascript.JsonLayout());
+          log.addAppender(ajaxAppender);
 
           function args2str(f) {
               var args = Array.prototype.slice.call(f.arguments);
@@ -27,7 +34,7 @@
           $provide.decorator('$log', ["$delegate", function ($delegate) {
               // Save the original $log.debug()
               var debugFn = $delegate.debug;
-              var log = log4javascript.getDefaultLogger();
+              //var log = log4javascript.getDefaultLogger();
               $delegate.debug = function () {
                   var args = [].slice.call(arguments);
 

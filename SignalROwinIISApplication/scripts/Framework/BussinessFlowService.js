@@ -2,44 +2,40 @@
     'use strict';
 
     /*
-        bussinessProcFlow handle the call to the external source, tries again if service was not availible
+        bussinessProcFlow wraps the functions of a service with a given wrapper function or with the default defined here.
 
     */
 
     var bussinessProcFlow = function ($log, $q) {
-        $log.debug("using bussinessProcFlow");
         var self = this;
-        try {
-            self.log = log4javascript.getDefaultLogger();
 
-        } catch (e) {
-            $log.debug("Loading of the logger failed");
-            $log.debug(e);
-        }
-
-        function extend(service)
+        function extend(service, wrapFunc )
         {
+            wrapFunc = wrapFunc || execute;
             for(var prop in service)
             {
                 if(typeof(prop) == 'function')
                 {
-                    obj[prop] = wrap(obj[prop]);
+                    obj[prop] = wrap(obj[prop], wrapFunc);
                 }
             }
+            return service;
         }
-        function wrap(func) {
+
+        function wrap(func, wrapFunc) {
             return function () {
-                call(func);
+                wrapFunc(func);
             }
         }
 
-        function call(action) {
+        function execute(action) {
             var deferred = $q.defer();
             $log.debug('calling method  ' + (action ? '<' + action.name + '>' : "<anonymous>"));
             try {
                 action().then(deferred.resolve, deferred.error);
             } catch (e) {
                 handleError(e);
+                deferred.error(e);
             }
             $log.debug('calling method ' + (action ? '<' + action.name + '>' : '<anonymous>') + " finished");
             return deferred.promise;
@@ -50,7 +46,7 @@
             $log.error(error);
         }
         return {
-            call: call,
+            execute: execute,
             extend: extend
         };
     };

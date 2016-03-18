@@ -169,6 +169,7 @@
     <Compile Include="Api\LoggingController.cs" />
     <Compile Include="Api\ProductsController.cs" />
     <Compile Include="DomainModel\IProductsRepository.cs" />
+    <Compile Include="DomainModel\LogEntry.cs" />
     <Compile Include="DomainModel\MessageType.cs" />
     <Compile Include="DomainModel\Product.cs" />
     <Compile Include="DomainModel\ProductDataMessage.cs" />

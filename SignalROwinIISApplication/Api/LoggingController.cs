@@ -4,36 +4,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using SignalROwinIISApplication.DomainModel;
 
 namespace SignalROwinIISApplication.Api
 {
     public class LoggingController : ApiController
     {
-        // GET: api/Logging
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //// GET: api/Logging
+        //public IEnumerable<LogEntry> Get()
+        //{
+        //    return new LogEntry[] {};
+        //}
 
-        // GET: api/Logging/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST: api/Logging
         public void Post([FromBody]string value)
         {
+            System.Diagnostics.Debug.WriteLine(value);
         }
 
-        // PUT: api/Logging/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// POST: api/Logging
+        //public void Post([FromBody]LogEntry value)
+        //{
+        //    System.Diagnostics.Debug.WriteLine(value.message);
+        //}
 
-        // DELETE: api/Logging/5
-        public void Delete(int id)
-        {
-        }
     }
 }
