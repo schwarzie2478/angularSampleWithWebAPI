@@ -2,7 +2,7 @@
     angular.module('application').controller('productsController',
         function ($scope, $log, productsService, productMessageHub, bussinessProcFlow) {
             $log.debug("loading the products");
-            bussinessProcFlow.call(productsService.get).then(function (products) { $scope.products = products; });
+            productsService.get().then(function (products) { $scope.products = products; });
 
             $scope.applicationBlocked = false;
             $scope.tableBlocked = false;

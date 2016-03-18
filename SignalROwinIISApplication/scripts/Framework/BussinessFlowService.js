@@ -8,25 +8,40 @@
 
     var bussinessProcFlow = function ($log, $q) {
         $log.debug("using bussinessProcFlow");
-        $log.debug((log4javascript ? "logger found" : "logger not loaded"));
         var self = this;
         try {
             self.log = log4javascript.getDefaultLogger();
-            self.log.debug("Hello from log4javascript");
 
         } catch (e) {
             $log.debug("Loading of the logger failed");
             $log.debug(e);
         }
+
+        function extend(service)
+        {
+            for(var prop in service)
+            {
+                if(typeof(prop) == 'function')
+                {
+                    obj[prop] = wrap(obj[prop]);
+                }
+            }
+        }
+        function wrap(func) {
+            return function () {
+                call(func);
+            }
+        }
+
         function call(action) {
             var deferred = $q.defer();
-            $log.debug('calling method= ' + (action ? action.constructor.name : "undefined"));
+            $log.debug('calling method  ' + (action ? '<' + action.name + '>' : "<anonymous>"));
             try {
                 action().then(deferred.resolve, deferred.error);
             } catch (e) {
                 handleError(e);
             }
-            $log.debug('calling method= ' + (action ? action.name : 'undefined') + " finished");
+            $log.debug('calling method ' + (action ? '<' + action.name + '>' : '<anonymous>') + " finished");
             return deferred.promise;
         }
 
@@ -35,7 +50,8 @@
             $log.error(error);
         }
         return {
-            call: call
+            call: call,
+            extend: extend
         };
     };
     angular.module('Framework.Services').factory('bussinessProcFlow', bussinessProcFlow);
