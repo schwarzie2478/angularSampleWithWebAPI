@@ -1,8 +1,13 @@
 ﻿(function () {
     angular.module('application').controller('productsController',
         function ($scope, $log, productsService, productMessageHub, bussinessProcFlow) {
+
+
+            /* Testing the bussiness flow inside the productService*/
             $log.debug("loading the products");
             productsService.get().then(function (products) { $scope.products = products; });
+
+
 
             $scope.applicationBlocked = false;
             $scope.tableBlocked = false;

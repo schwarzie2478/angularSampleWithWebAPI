@@ -6,7 +6,7 @@
 
     */
 
-    var bussinessProcFlow = function ($log, $q) {
+    var bussinessProcFlow = function ($log, $q, createRetryService) {
         var self = this;
 
         function extend(service, wrapFunc )
@@ -14,26 +14,31 @@
             wrapFunc = wrapFunc || execute;
             for(var prop in service)
             {
-                if(typeof(prop) == 'function')
+                if(typeof(service[prop]) == 'function')
                 {
-                    obj[prop] = wrap(obj[prop], wrapFunc);
+                    service[prop] = wrap(service[prop], wrapFunc);
                 }
             }
             return service;
         }
 
+
+
         function wrap(func, wrapFunc) {
             return function () {
-                wrapFunc(func);
+                return wrapFunc(func);
             }
         }
-
+        /* Default wrapper function log before and after
+           and can repeat the function if it fails
+           */
         function execute(action) {
             var deferred = $q.defer();
             $log.debug('calling method  ' + (action ? '<' + action.name + '>' : "<anonymous>"));
             try {
-                action().then(deferred.resolve, deferred.error);
+                createRetryService.repeat(action).then(deferred.resolve, deferred.error);
             } catch (e) {
+                //Do we ever come here?
                 handleError(e);
                 deferred.error(e);
             }

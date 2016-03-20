@@ -11,8 +11,9 @@
           ajaxAppender.addHeader("Content-Type", "application/json");
 
           ajaxAppender.setWaitForResponse(true);
-          //ajaxAppender.setLayout(new log4javascript.JsonLayout());
-          log.addAppender(ajaxAppender);
+          ajaxAppender.setLayout(new log4javascript.JsonLayout());
+          log.addAppender(ajaxAppender);
+
 
           function args2str(f) {
               var args = Array.prototype.slice.call(f.arguments);

@@ -17,17 +17,21 @@ namespace SignalROwinIISApplication.Api
         //}
 
 
-        // POST: api/Logging
-        public void Post([FromBody]string value)
-        {
-            System.Diagnostics.Debug.WriteLine(value);
-        }
-
         //// POST: api/Logging
-        //public void Post([FromBody]LogEntry value)
+        //public void Post([FromBody]string value)
         //{
-        //    System.Diagnostics.Debug.WriteLine(value.message);
+        //    System.Diagnostics.Debug.WriteLine(value);
         //}
+
+        // POST: api/Logging
+        public void Post([FromBody]List<LogEntry> value)
+        {
+            foreach (LogEntry entry in value)
+            {
+                Common.Logging.LogManager.GetLogger("clientLogger").Debug(entry.message);
+            }
+
+        }
 
     }
 }
