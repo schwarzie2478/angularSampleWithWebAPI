@@ -38,7 +38,7 @@
             try {
                 createRetryService.repeat(action).then(deferred.resolve, deferred.error);
             } catch (e) {
-                //Do we ever come here?
+                //Should we ever come here? Yes when action is not valid...
                 handleError(e);
                 deferred.error(e);
             }
