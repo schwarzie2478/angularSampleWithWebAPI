@@ -3,7 +3,7 @@
     'use strict';
     window.appName = 'application';
 
-    var applicationModule = angular.module(appName, ['Framework.Services']);
+    var applicationModule = angular.module(appName, ['Framework.Services', 'Restangular']);
 
     // SignalR's hub object.
     var productMessageHub = $.connection.productMessageHub;
