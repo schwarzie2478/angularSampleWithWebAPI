@@ -5,9 +5,11 @@
   ],
   "description": "",
   "main": "",
-  "moduleType": [],
+  "moduleType": [
+    "amd"
+  ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/schwarzie2478/angularSampleWithWebAPI",
   "private": true,
   "ignore": [
     "**/.*",
@@ -17,6 +19,11 @@
     "tests"
   ],
   "dependencies": {
-    "restangular": "^1.5.2"
+    "log4javascript": "~1.4.9",
+    "stacktrace-js": "~1.0.4",
+    "lodash": "^4.6.1",
+    "restangular": "^1.5.2",
+    "source-map": "^0.5.2",
+    "angular": "^1.5.2"
   }
 }

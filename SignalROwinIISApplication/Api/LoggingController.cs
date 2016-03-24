@@ -29,6 +29,7 @@ namespace SignalROwinIISApplication.Api
             foreach (LogEntry entry in value)
             {
                 Common.Logging.LogManager.GetLogger("clientLogger").Debug(entry.message);
+                
             }
 
         }

@@ -29,8 +29,9 @@
                 return wrapFunc(func);
             }
         }
-        /* Default wrapper function log before and after
-           and can repeat the function if it fails
+        /* Default wrapper function:
+             log before and after
+             can repeat the function if it fails
            */
         function execute(action) {
             var deferred = $q.defer();
