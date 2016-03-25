@@ -170,6 +170,7 @@
     <Content Include="scripts\Framework\MessagingService.js" />
     <Content Include="scripts\Framework\Module.Definition.js" />
     <Content Include="bower.json" />
+    <Content Include="package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
