@@ -25,5 +25,8 @@
     "restangular": "^1.5.2",
     "source-map": "^0.5.2",
     "angular": "^1.5.2"
+  },
+  "resolutions": {
+    "source-map": "0.5.1"
   }
 }

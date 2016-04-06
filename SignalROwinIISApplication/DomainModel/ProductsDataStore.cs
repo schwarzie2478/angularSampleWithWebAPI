@@ -39,7 +39,25 @@ namespace SignalROwinIISApplication.DomainModel
                 }
             }
         }
+        public static Product Product(int productId)
+        {
+            ProductsLock.EnterReadLock();
+            try
+            {
+                if (!(products.Count > 0 && productId >= 0 && productId < products.Count))
+                {
+                    //Invalid request
+                    return null;
+                }
 
+                return products[productId];
+
+            }finally
+            {
+                ProductsLock.ExitReadLock();
+            }
+            return null;
+        }
         public static void Insert(Product product)
         {
             Contract.Requires<ArgumentNullException>(product != null);
