@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SignalROwinIISApplication.DomainModel
 {
@@ -10,6 +11,7 @@ namespace SignalROwinIISApplication.DomainModel
         {
             return ProductsDataStore.Products;
         }
+
 
         public void Insert(Product product)
         {
@@ -24,6 +26,11 @@ namespace SignalROwinIISApplication.DomainModel
         public void Delete(int productId)
         {
             ProductsDataStore.Delete(productId);
+        }
+
+        public Product GetProduct(int productId)
+        {
+            return ProductsDataStore.Product(productId);
         }
 
         #endregion

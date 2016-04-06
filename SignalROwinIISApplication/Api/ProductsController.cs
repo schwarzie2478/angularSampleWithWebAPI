@@ -12,5 +12,9 @@ namespace SignalROwinIISApplication.Api
         {
             return this.productsRepository.GetAllProducts();
         }
+        public Product Get(int productId)
+        {
+            return this.productsRepository.GetProduct(productId);
+        }
     }
 }

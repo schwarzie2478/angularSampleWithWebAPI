@@ -4,7 +4,7 @@
         return {
             get: function get() {
 
-                return polly().retry(2).executeforPromise(Restangular.all('api/Products').getList()).;
+                return polly().retry(2).executeforPromise(Restangular.all('api/Products').getList());
 
 
                 //var deferred = $q.defer();
