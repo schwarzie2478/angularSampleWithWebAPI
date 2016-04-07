@@ -58,7 +58,7 @@
 
                   
                   // Call the original with the output prepended with formatted timestamp
-                  originalFn.apply(null, args)
+                  polly().retry(2).execute(originalFn.apply(null, args)); 
               };
                   
               }, this);
