@@ -6,6 +6,7 @@
   "dependencies": {
     "exit": "^0.1.2",
     "glob": "^3.2.11",
+    "http-status-codes": "^1.0.6",
     "inherits": "^2.0.1",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",

@@ -189,6 +189,7 @@
     <Content Include="scripts\Application\services\productsService.js" />
     <Content Include="scripts\Framework\BussinessFlowService.js" />
     <Content Include="scripts\Framework\RetryService.js" />
+    <Content Include="scripts\httpStatus.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
     <Content Include="scripts\jquery.signalR-2.0.3.js" />
@@ -231,7 +232,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>26867</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
