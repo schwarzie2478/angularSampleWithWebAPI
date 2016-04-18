@@ -1,13 +1,13 @@
 ﻿
 (function () {
-    var createRetryService = function ($timeout,$log,$q) {
+    var retryService = function ($timeout,$log,$q) {
 
-        var createRetryServiceInstance = function (func, args, maxAttempts, interval) {
+        var retryServiceInstance = function (func, args, maxAttempts, interval,errorFunc ) {
 
             var attempts = 0;
             var myArgs = args;
             var deferred = $q.defer();
-
+            var handleErrorFunc = errorFunc || function () { return true };
             var onSuccess = function (response) {
                 $log.debug("Succes in " + attempts + " attemp(s)");
                 deferred.resolve(response);
@@ -53,21 +53,43 @@
                 delay: delay
             };
         };
+        var handleHttpErrors = function (err) {
+            //Retry if these conditions are return others?
+            return _.includes([
+                statusCodes.SERVICE_UNAVAILABLE,
+                statusCodes.BAD_GATEWAY,
+                statusCodes.GATEWAY_TIMEOUT]
+                , error.status);
 
+        }
         var repeat = function (func, args) {
-            var repeater = createRetryServiceInstance(func, args, maxAttempts, delay);
+            var repeater = retryServiceInstance(func, args, maxAttempts, delay);
 
             return repeater.repeat();
         };
+        var repeatForSpecifiedErrors = function (func, args, errorFunc)
+        {
+            var repeater = retryServiceInstance(func, args, maxAttempts, delay, errorFunc);
+
+            return repeater.repeat();
+        }
+
+        var repeatForSpecifiedErrorsWithPolly = function (func, args, errorFunc) {
+            
+            return polly().handle(errorFunc).retry(maxAttempts).execute(func);
+        }
+
 
         return {
             repeat: repeat,
+            repeatForSpecifiedErrors: repeatForSpecifiedErrors,
+            handleHttpErrors: handleHttpErrors,
             setDefaults: setDefaults,
             getDefaults: getDefaults
         };
     };
 
-    angular.module('Framework.Services').factory('createRetryService', createRetryService);
+    angular.module('Framework.Services').factory('retryService', retryService);
 })();
 
 

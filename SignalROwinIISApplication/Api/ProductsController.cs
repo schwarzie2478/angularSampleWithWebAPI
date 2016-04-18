@@ -11,10 +11,11 @@ namespace SignalROwinIISApplication.Api
         public IEnumerable<Product> Get()
         {
             return this.productsRepository.GetAllProducts();
+
         }
-        public Product Get(int productId)
+        public Product GetProduct(int id)
         {
-            return this.productsRepository.GetProduct(productId);
+            return this.productsRepository.GetProduct(id);
         }
     }
 }

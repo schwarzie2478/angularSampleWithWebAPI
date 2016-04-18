@@ -6,7 +6,7 @@
 
     */
 
-    var bussinessProcFlow = function ($log, $q, createRetryService) {
+    var bussinessProcFlow = function ($log, $q, retryService) {
         var self = this;
 
         function extend(service, wrapFunc )
@@ -37,7 +37,7 @@
             var deferred = $q.defer();
             $log.debug('calling method  ' + (action ? '<' + action.name + '>' : "<anonymous>"));
             try {
-                createRetryService.repeat(action).then(deferred.resolve, deferred.error);
+                retryService.repeat(action).then(deferred.resolve, deferred.error);
             } catch (e) {
                 //Should we ever come here? Yes when action is not valid...
                 handleError(e);

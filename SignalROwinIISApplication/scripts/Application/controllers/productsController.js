@@ -6,6 +6,7 @@
             /* Testing the bussiness flow inside the productService*/
             $log.info("loading the products");
             productsService.get().then(function (products) { $scope.products = products; });
+            productsService.getProduct(1).then(function (product) {$log.debug(product.name);});
 
 
 
